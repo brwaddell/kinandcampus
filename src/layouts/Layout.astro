@@ -1,0 +1,12 @@
+---
+import "../styles/global.css";
+const { title = "Kin & Campus | Personalized care for college students" } = Astro.props;
+---
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>{title}</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=DM+Sans:wght@400;500;700&display=swap"></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="i-heart"><path d="M12 20s-7-4.6-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.4-7 10-7 10z"/></g><g id="i-clock"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g><g id="i-moon"><path d="M20 14.5A8 8 0 1 1 9.5 4 6.5 6.5 0 0 0 20 14.5z"/></g><g id="i-leaf"><path d="M5 19c0-9 5-14 14-14 0 9-5 14-14 14zM5 19l7-7"/></g><g id="i-compass"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></g><g id="i-chat"><path d="M4 5h16v11H9l-5 4z"/></g><g id="i-shield"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></g></defs></svg>
+<header><div class="w"><a class="logo" href="/"><svg width="34" height="34" viewBox="0 0 122 120" aria-hidden="true"><circle cx="46" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="12"/><circle cx="86" cy="60" r="20" fill="none" stroke="#C9A24B" stroke-width="12"/></svg><span>Kin <i>&amp;</i> Campus</span></a>
+<nav class="dn"><a href="/care">Our Care</a><a href="/about">Meet the Doctor</a><a href="/membership">Membership</a><a href="/students">For Students</a><a href="/privacy">Privacy</a><a class="btn" href="/join">Join</a></nav>
+<details class="mn"><summary>Menu</summary><div><a href="/care">Our Care</a><a href="/about">Meet the Doctor</a><a href="/membership">Membership</a><a href="/students">For Students</a><a href="/privacy">Privacy</a><a href="/join">Join</a></div></details></div></header>
+<main><slot /></main>
+<footer><div class="w fg"><div><b>Kin &amp; Campus</b><p>Personalized care for college students.<br>Blacksburg, VA &middot; [ADDRESS] &middot; [PHONE]</p></div><div><a href="/care">Our Care</a><a href="/about">Meet the Doctor</a><a href="/membership">Membership</a><a href="/students">For Students</a><a href="/privacy">Privacy Promise</a><a href="/join">Join</a></div><div><p>In an emergency, call 911.</p><p>Kin &amp; Campus is an independent practice and is not affiliated with Virginia Tech.</p></div></div></footer>
+</body></html>

@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { href } from "../lib/paths";
 ---
 <Layout title="Meet the Doctor | Kin & Campus">
 <div class="w ph"><div class="eyebrow">Meet the doctor</div><h1>A board-certified pediatrician. Local to Blacksburg.</h1></div>
 <div class="w split"><svg class="art" viewBox="0 0 360 360" role="img" aria-label="Portrait placeholder"><rect width="360" height="360" rx="28" fill="#EADFCB"/><circle cx="180" cy="140" r="56" fill="#9CAF98"/><path d="M70 330q110-150 220 0z" fill="#6B2737"/><circle cx="270" cy="86" r="20" fill="none" stroke="#C9A24B" stroke-width="8"/></svg>
-<div><p class="lead">A pediatrician who already lives in this town, knows the drive from campus, and built the panel for college students — and for the parents still 250 miles away.</p><p>Looking after them here, in lockstep with the doctor at home.</p><h3 style="margin-top:28px">How I practice</h3><p>I sit with the student. You get the standing rule you agree on. Their hometown doctor gets the note the same afternoon. These are the years they learn how to be a patient.</p></div></div>
+<div><p class="lead">A pediatrician who already lives in this town, knows the drive from campus, and built the panel for Virginia Tech students — and for the parents still 250 miles away.</p><p>Looking after them here, in lockstep with the doctor at home. Eight minutes from campus. Direct text. A letter the same afternoon.</p><h3 style="margin-top:28px">How I practice</h3><p>I sit with the student. You get the standing rule you agree on. Their hometown doctor gets the note the same afternoon. These are the years they learn how to be a patient.</p><p style="margin-top:28px"><a class="btn" href={href("join")}>Reserve a spot</a></p></div></div>
 </Layout>

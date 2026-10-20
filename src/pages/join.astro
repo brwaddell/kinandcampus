@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 ---
 <Layout title="Join | Kin & Campus">
-<div class="w ph"><div class="eyebrow">Join</div><h1>Someone looking after them starts here.</h1><p class="lead">Five short questions. A call next. No chart on this website.</p></div>
+<div class="w ph"><div class="eyebrow">Join</div><h1>Someone looking after them starts here.</h1></div>
 <div class="w">
 <form id="ob" class="ob form" action="#" method="POST">
 <p id="ob-prog" class="ob-prog" aria-live="polite">Question 1 of 5</p>
@@ -36,13 +36,17 @@ import Layout from "../layouts/Layout.astro";
 </div>
 </div>
 
-<div class="step" data-step="hold" hidden>
-<h2 id="hold-q">What should never slip?</h2>
-<div class="ob-opts" id="hold-opts"></div>
+<div class="step" data-step="doctor" hidden>
+<h2 id="doctor-q">Is there a hometown doctor we should stay in touch with?</h2>
+<div class="ob-opts">
+<button type="button" class="ob-opt" data-field="doctor" data-value="yes">Yes</button>
+<button type="button" class="ob-opt" data-field="doctor" data-value="not-yet">Not yet</button>
+<button type="button" class="ob-opt" data-field="doctor" data-value="later">We'll decide on the call</button>
+</div>
 </div>
 
 <div class="step" data-step="city" hidden>
-<h2>Where should we send the first note home?</h2>
+<h2>Where are you coming from?</h2>
 <label>Hometown city only<input name="hometown_city" id="hometown_city" maxlength="80" autocomplete="address-level2" placeholder="Richmond, Charlotte…"></label>
 <p class="note">City only—not a doctor's name, and not a chart.</p>
 <div class="ob-nav"><button class="btn" type="button" id="city-go">Continue</button></div>
@@ -59,10 +63,9 @@ import Layout from "../layouts/Layout.astro";
 <button type="button" class="ob-opt" data-field="time" data-value="after-work">After work</button>
 <button type="button" class="ob-opt" data-field="time" data-value="weekend">Weekend</button>
 </div>
-<label class="ck"><input type="checkbox" name="consent" id="consent" required> I agree Kin &amp; Campus may call me about a seat.</label>
-<div class="ob-nav"><button class="btn" type="submit" id="call-go">Call me about a seat.</button></div>
+<div class="ob-nav"><button class="btn" type="submit" id="call-go">Schedule a call</button></div>
 </div>
-<p id="ob-skip" class="ob-skip"><button class="lnk ob-call" type="button">Call me about a seat.</button></p>
+<p id="ob-skip" class="ob-skip"><button class="lnk ob-call" type="button">Schedule a call</button></p>
 </form>
 
 <div id="ty" class="card" hidden>
@@ -77,21 +80,9 @@ import Layout from "../layouts/Layout.astro";
   var thanks = document.getElementById("ty");
   var prog = document.getElementById("ob-prog");
   var cb = document.getElementById("ob-cb");
-  var answers = { path: "parent", who: "", when: "", year: "", hold: "", city: "", name: "", phone: "", time: "" };
-  var parentOrder = ["who", "when", "hold", "city", "call"];
-  var studentOrder = ["year", "hold", "call"];
-  var parentHold = [
-    ["plan", "The plan they already have"],
-    ["nearby", "Someone nearby on a bad day"],
-    ["habits", "Learning to run their own care"],
-    ["letter", "You and the hometown doctor staying in the letter"]
-  ];
-  var studentHold = [
-    ["plan", "Keep my plan running"],
-    ["nearby", "Someone nearby on a bad day"],
-    ["habits", "Learn to run my own care"],
-    ["letter", "My say in who hears from the doctor"]
-  ];
+  var answers = { path: "parent", who: "", when: "", year: "", doctor: "", city: "", name: "", phone: "", time: "" };
+  var parentOrder = ["who", "when", "doctor", "city", "call"];
+  var studentOrder = ["year", "doctor", "city", "call"];
 
   function order() {
     return answers.path === "student" ? studentOrder : parentOrder;
@@ -106,7 +97,6 @@ import Layout from "../layouts/Layout.astro";
     var seq = order();
     var n = seq.indexOf(step) + 1;
     prog.textContent = "Question " + n + " of " + seq.length;
-    if (step === "hold") fillHold();
     document.getElementById("ob-skip").hidden = step === "call";
     if (step === "call") {
       document.getElementById("call-q").textContent = answers.path === "student" ? "What's the best number for you?" : "Who should we call?";
@@ -114,23 +104,6 @@ import Layout from "../layouts/Layout.astro";
         ? "Your number. Your chart. Your say. We don't take a history on this site."
         : "We'll call. We don't take a history on this site.";
     }
-  }
-
-  function fillHold() {
-    var q = document.getElementById("hold-q");
-    var box = document.getElementById("hold-opts");
-    var opts = answers.path === "student" ? studentHold : parentHold;
-    q.textContent = answers.path === "student" ? "What do you want most?" : "What should never slip?";
-    box.replaceChildren();
-    opts.forEach(function (pair) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.className = "ob-opt";
-      b.setAttribute("data-field", "hold");
-      b.setAttribute("data-value", pair[0]);
-      b.textContent = pair[1];
-      box.appendChild(b);
-    });
   }
 
   function callback(text) {
@@ -150,7 +123,7 @@ import Layout from "../layouts/Layout.astro";
       case "on-campus":
         return "Already in Blacksburg. We'll meet them here.";
       case "graduate":
-        return "Graduate school in town. We'll have a seat to talk about.";
+        return "Graduate school in town. We'll schedule a call.";
       case "student":
         return "Your number. Your chart. Your say.";
       default:
@@ -161,9 +134,9 @@ import Layout from "../layouts/Layout.astro";
   function whenLine(value) {
     switch (value) {
       case "summer":
-        return "This summer. We'll have a seat ready to talk about.";
+        return "This summer. We'll schedule a call.";
       case "august":
-        return "August in Blacksburg. We'll have a seat ready to talk about.";
+        return "August in Blacksburg. We'll schedule a call.";
       case "here":
         return "Already here. We'll make room to talk this week.";
       default:
@@ -178,38 +151,24 @@ import Layout from "../layouts/Layout.astro";
       case "here":
         return "Already here. We'll make room to talk this week.";
       case "graduate":
-        return "Graduate school. We'll have a seat ready to talk about.";
+        return "Graduate school. We'll schedule a call.";
       default:
         throw new Error("unknown year");
     }
   }
 
-  function holdLine(value) {
-    if (answers.path === "student") {
-      switch (value) {
-        case "plan":
-          return "Your plan stays with you.";
-        case "nearby":
-          return "Someone nearby on a bad day. That's what we do.";
-        case "habits":
-          return "You'll learn to run your own care. We'll sit with you.";
-        case "letter":
-          return "Your say in who hears from the doctor.";
-        default:
-          throw new Error("unknown hold");
-      }
-    }
+  function doctorLine(value) {
     switch (value) {
-      case "plan":
-        return "The plan they already have. We'll hold it here.";
-      case "nearby":
-        return "Someone nearby on a bad day. That's what we do.";
-      case "habits":
-        return "They'll learn to run their own care. We'll sit with them.";
-      case "letter":
-        return "You and the hometown doctor stay in the letter.";
+      case "yes":
+        return answers.path === "student"
+          ? "We'll stay in touch with your hometown doctor."
+          : "We'll stay in touch with their hometown doctor.";
+      case "not-yet":
+        return "No hometown doctor yet. We'll sort that on the call.";
+      case "later":
+        return "We'll decide on the call.";
       default:
-        throw new Error("unknown hold");
+        throw new Error("unknown doctor");
     }
   }
 
@@ -253,9 +212,9 @@ import Layout from "../layouts/Layout.astro";
       show(nextAfter("year"));
       return;
     }
-    if (field === "hold") {
-      callback(holdLine(value));
-      show(nextAfter("hold"));
+    if (field === "doctor") {
+      callback(doctorLine(value));
+      show(nextAfter("doctor"));
     }
   });
 
@@ -266,7 +225,7 @@ import Layout from "../layouts/Layout.astro";
       return;
     }
     answers.city = city;
-    callback("A note to " + city + ". Named on day one.");
+    callback("Coming from " + city + ".");
     show("call");
   });
 
@@ -274,7 +233,7 @@ import Layout from "../layouts/Layout.astro";
     e.preventDefault();
     var name = document.getElementById("first_name").value.trim();
     var phone = document.getElementById("phone").value.trim();
-    if (!name || !phone || !document.getElementById("consent").checked) return;
+    if (!name || !phone) return;
     answers.name = name;
     answers.phone = phone;
     answers.city = document.getElementById("hometown_city").value.trim();

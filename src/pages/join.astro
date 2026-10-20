@@ -2,20 +2,288 @@
 import Layout from "../layouts/Layout.astro";
 ---
 <Layout title="Join | Kin & Campus">
-<div class="w ph"><div class="eyebrow">Join</div><h1>Tell us who is coming to Blacksburg.</h1><p class="lead">A parent usually starts this. We'll follow with a call, then the student meets their pediatrician.</p></div>
-<div class="w"><form id="jf" class="card form" action="#" method="POST">
-<label>Your name<input name="parent_name" required autocomplete="name"></label>
-<label>Your email<input type="email" name="email" required autocomplete="email"></label>
-<label>Callback number<input type="tel" name="phone" autocomplete="tel"></label>
-<label>Student's first name<input name="student_name" required></label>
-<label>Class year<input name="class_year" placeholder="2028"></label>
-<label>Hometown doctor's city<input name="hometown_pcp_city" placeholder="Richmond, Charlotte…"></label>
-<p class="note" style="margin:0">Do not include symptoms, diagnoses, medications, or records. This form is an introduction, not a chart.</p>
-<label class="ck"><input type="checkbox" name="consent" required> I agree Kin &amp; Campus may contact me about membership. I understand my student chooses what health information is shared with me.</label>
-<button class="btn" type="submit">Request a call</button></form>
-<div id="ty" class="card" hidden><h2>Thank you.</h2><p>We've received your request and will be in touch. We're glad you found us.</p></div>
+<div class="w ph"><div class="eyebrow">Join</div><h1>Someone looking after them starts here.</h1><p class="lead">Five short questions. A call next. No chart on this website.</p></div>
+<div class="w">
+<form id="ob" class="ob form" action="#" method="POST">
+<p id="ob-prog" class="ob-prog" aria-live="polite">Question 1 of 5</p>
+<p id="ob-cb" class="ob-cb" hidden aria-live="polite"></p>
+
+<div class="step" data-step="who">
+<h2>Who are you looking after?</h2>
+<div class="ob-opts">
+<button type="button" class="ob-opt" data-field="who" data-value="first-year">Incoming first-year</button>
+<button type="button" class="ob-opt" data-field="who" data-value="on-campus">Already on campus</button>
+<button type="button" class="ob-opt" data-field="who" data-value="graduate">Graduate student</button>
+<button type="button" class="ob-opt" data-field="who" data-value="student">I'm the student</button>
+</div>
+</div>
+
+<div class="step" data-step="when" hidden>
+<h2>When do they need a doctor in town?</h2>
+<div class="ob-opts">
+<button type="button" class="ob-opt" data-field="when" data-value="summer">This summer</button>
+<button type="button" class="ob-opt" data-field="when" data-value="august">Before August</button>
+<button type="button" class="ob-opt" data-field="when" data-value="here">Already here</button>
+</div>
+</div>
+
+<div class="step" data-step="year" hidden>
+<h2>Where are you in school?</h2>
+<div class="ob-opts">
+<button type="button" class="ob-opt" data-field="year" data-value="first-year">Incoming first-year</button>
+<button type="button" class="ob-opt" data-field="year" data-value="here">Already here</button>
+<button type="button" class="ob-opt" data-field="year" data-value="graduate">Graduate student</button>
+</div>
+</div>
+
+<div class="step" data-step="hold" hidden>
+<h2 id="hold-q">What should never slip?</h2>
+<div class="ob-opts" id="hold-opts"></div>
+</div>
+
+<div class="step" data-step="city" hidden>
+<h2>Where should we send the first note home?</h2>
+<label>Hometown city only<input name="hometown_city" id="hometown_city" maxlength="80" autocomplete="address-level2" placeholder="Richmond, Charlotte…"></label>
+<p class="note">City only—not a doctor's name, and not a chart.</p>
+<div class="ob-nav"><button class="btn" type="button" id="city-go">Continue</button></div>
+</div>
+
+<div class="step" data-step="call" hidden>
+<h2 id="call-q">Who should we call?</h2>
+<label>First name<input name="first_name" id="first_name" required maxlength="40" autocomplete="given-name"></label>
+<label>Mobile<input type="tel" name="phone" id="phone" required maxlength="20" autocomplete="tel" inputmode="tel"></label>
+<p class="note" id="call-note">We'll call. We don't take a history on this site.</p>
+<p class="ob-times">Best time <span>(optional)</span></p>
+<div class="ob-opts ob-opts-row">
+<button type="button" class="ob-opt" data-field="time" data-value="morning">Morning</button>
+<button type="button" class="ob-opt" data-field="time" data-value="after-work">After work</button>
+<button type="button" class="ob-opt" data-field="time" data-value="weekend">Weekend</button>
+</div>
+<label class="ck"><input type="checkbox" name="consent" id="consent" required> I agree Kin &amp; Campus may call me about a seat.</label>
+<div class="ob-nav"><button class="btn" type="submit" id="call-go">Call me about a seat.</button></div>
+</div>
+<p id="ob-skip" class="ob-skip"><button class="lnk ob-call" type="button">Call me about a seat.</button></p>
+</form>
+
+<div id="ty" class="card" hidden>
+<h2>That's it. No chart on this website.</h2>
+<p>We'll call. We don't take a history on this site.</p>
+</div>
+</div>
+
 <script is:inline>
-var f=document.getElementById('jf');
-f.addEventListener('submit',function(e){e.preventDefault();f.hidden=true;document.getElementById('ty').hidden=false});
-</script></div>
+(function () {
+  var form = document.getElementById("ob");
+  var thanks = document.getElementById("ty");
+  var prog = document.getElementById("ob-prog");
+  var cb = document.getElementById("ob-cb");
+  var answers = { path: "parent", who: "", when: "", year: "", hold: "", city: "", name: "", phone: "", time: "" };
+  var parentOrder = ["who", "when", "hold", "city", "call"];
+  var studentOrder = ["year", "hold", "call"];
+  var parentHold = [
+    ["plan", "The plan they already have"],
+    ["nearby", "Someone nearby on a bad day"],
+    ["habits", "Learning to run their own care"],
+    ["letter", "You and the hometown doctor staying in the letter"]
+  ];
+  var studentHold = [
+    ["plan", "Keep my plan running"],
+    ["nearby", "Someone nearby on a bad day"],
+    ["habits", "Learn to run my own care"],
+    ["letter", "My say in who hears from the doctor"]
+  ];
+
+  function order() {
+    return answers.path === "student" ? studentOrder : parentOrder;
+  }
+
+  function show(step) {
+    var steps = form.querySelectorAll(".step");
+    var i;
+    for (i = 0; i < steps.length; i++) {
+      steps[i].hidden = steps[i].getAttribute("data-step") !== step;
+    }
+    var seq = order();
+    var n = seq.indexOf(step) + 1;
+    prog.textContent = "Question " + n + " of " + seq.length;
+    if (step === "hold") fillHold();
+    document.getElementById("ob-skip").hidden = step === "call";
+    if (step === "call") {
+      document.getElementById("call-q").textContent = answers.path === "student" ? "What's the best number for you?" : "Who should we call?";
+      document.getElementById("call-note").textContent = answers.path === "student"
+        ? "Your number. Your chart. Your say. We don't take a history on this site."
+        : "We'll call. We don't take a history on this site.";
+    }
+  }
+
+  function fillHold() {
+    var q = document.getElementById("hold-q");
+    var box = document.getElementById("hold-opts");
+    var opts = answers.path === "student" ? studentHold : parentHold;
+    q.textContent = answers.path === "student" ? "What do you want most?" : "What should never slip?";
+    box.replaceChildren();
+    opts.forEach(function (pair) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "ob-opt";
+      b.setAttribute("data-field", "hold");
+      b.setAttribute("data-value", pair[0]);
+      b.textContent = pair[1];
+      box.appendChild(b);
+    });
+  }
+
+  function callback(text) {
+    if (!text) {
+      cb.hidden = true;
+      cb.textContent = "";
+      return;
+    }
+    cb.hidden = false;
+    cb.textContent = text;
+  }
+
+  function whoLine(value) {
+    switch (value) {
+      case "first-year":
+        return "A first year. We'll look after them in town.";
+      case "on-campus":
+        return "Already in Blacksburg. We'll meet them here.";
+      case "graduate":
+        return "Graduate school in town. We'll have a seat to talk about.";
+      case "student":
+        return "Your number. Your chart. Your say.";
+      default:
+        throw new Error("unknown who");
+    }
+  }
+
+  function whenLine(value) {
+    switch (value) {
+      case "summer":
+        return "This summer. We'll have a seat ready to talk about.";
+      case "august":
+        return "August in Blacksburg. We'll have a seat ready to talk about.";
+      case "here":
+        return "Already here. We'll make room to talk this week.";
+      default:
+        throw new Error("unknown when");
+    }
+  }
+
+  function yearLine(value) {
+    switch (value) {
+      case "first-year":
+        return "Incoming. We'll meet you in town.";
+      case "here":
+        return "Already here. We'll make room to talk this week.";
+      case "graduate":
+        return "Graduate school. We'll have a seat ready to talk about.";
+      default:
+        throw new Error("unknown year");
+    }
+  }
+
+  function holdLine(value) {
+    if (answers.path === "student") {
+      switch (value) {
+        case "plan":
+          return "Your plan stays with you.";
+        case "nearby":
+          return "Someone nearby on a bad day. That's what we do.";
+        case "habits":
+          return "You'll learn to run your own care. We'll sit with you.";
+        case "letter":
+          return "Your say in who hears from the doctor.";
+        default:
+          throw new Error("unknown hold");
+      }
+    }
+    switch (value) {
+      case "plan":
+        return "The plan they already have. We'll hold it here.";
+      case "nearby":
+        return "Someone nearby on a bad day. That's what we do.";
+      case "habits":
+        return "They'll learn to run their own care. We'll sit with them.";
+      case "letter":
+        return "You and the hometown doctor stay in the letter.";
+      default:
+        throw new Error("unknown hold");
+    }
+  }
+
+  function nextAfter(step) {
+    var seq = order();
+    var i = seq.indexOf(step);
+    return seq[Math.min(i + 1, seq.length - 1)];
+  }
+
+  form.addEventListener("click", function (e) {
+    var t = e.target;
+    if (!(t instanceof HTMLElement)) return;
+    if (t.classList.contains("ob-call")) {
+      show("call");
+      return;
+    }
+    var field = t.getAttribute("data-field");
+    var value = t.getAttribute("data-value");
+    if (!field || !value) return;
+    if (field === "time") {
+      answers.time = value;
+      var times = form.querySelectorAll('[data-field="time"]');
+      var i;
+      for (i = 0; i < times.length; i++) times[i].setAttribute("aria-pressed", times[i] === t ? "true" : "false");
+      return;
+    }
+    answers[field] = value;
+    if (field === "who") {
+      answers.path = value === "student" ? "student" : "parent";
+      callback(whoLine(value));
+      show(value === "student" ? "year" : "when");
+      return;
+    }
+    if (field === "when") {
+      callback(whenLine(value));
+      show(nextAfter("when"));
+      return;
+    }
+    if (field === "year") {
+      callback(yearLine(value));
+      show(nextAfter("year"));
+      return;
+    }
+    if (field === "hold") {
+      callback(holdLine(value));
+      show(nextAfter("hold"));
+    }
+  });
+
+  document.getElementById("city-go").addEventListener("click", function () {
+    var city = document.getElementById("hometown_city").value.trim();
+    if (city.length < 2) {
+      document.getElementById("hometown_city").focus();
+      return;
+    }
+    answers.city = city;
+    callback("A note to " + city + ". Named on day one.");
+    show("call");
+  });
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = document.getElementById("first_name").value.trim();
+    var phone = document.getElementById("phone").value.trim();
+    if (!name || !phone || !document.getElementById("consent").checked) return;
+    answers.name = name;
+    answers.phone = phone;
+    answers.city = document.getElementById("hometown_city").value.trim();
+    form.hidden = true;
+    thanks.hidden = false;
+  });
+
+  show("who");
+})();
+</script>
+</div>
 </Layout>

@@ -9,5 +9,11 @@ const { title = "Kin & Campus | Someone looking after them" } = Astro.props;
 <nav class="dn"><a href={href("parents")}>For Parents</a><a href={href("students")}>For Students</a><a href={href("care")}>Our Care</a><a href={href("membership")}>Membership</a><a class="btn" href={href("join")}>Join</a></nav>
 <details class="mn"><summary>Menu</summary><div><a href={href("parents")}>For Parents</a><a href={href("students")}>For Students</a><a href={href("care")}>Our Care</a><a href={href("membership")}>Membership</a><a href={href("privacy")}>Privacy</a><a href={href("join")}>Join</a></div></details></div></header>
 <main><slot /></main>
-<footer><div class="w fg"><div><b>Kin &amp; Campus</b><p>A local pediatrician for Virginia Tech students.<br>Blacksburg, Virginia</p></div><div><a href={href("parents")}>For Parents</a><a href={href("students")}>For Students</a><a href={href("care")}>Our Care</a><a href={href("membership")}>Membership</a><a href={href("privacy")}>Privacy Promise</a><a href={href("join")}>Join</a></div><div><p>A parent usually starts with a call. In an emergency, call 911.</p><p>Kin &amp; Campus is an independent practice and is not affiliated with Virginia Tech.</p></div></div></footer>
+<footer><div class="w fg">
+<div><a class="logo" href={href()}><svg width="34" height="34" viewBox="0 0 122 120" aria-hidden="true"><circle cx="46" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="12"/><circle cx="86" cy="60" r="20" fill="none" stroke="#C9A24B" stroke-width="12"/></svg><span>Kin <i>&amp;</i> Campus</span></a><p>A concierge, holistic medical practice for College and Graduate Students. Blacksburg, Virginia.</p></div>
+<div><div class="eyebrow">Navigation</div><a href={href("parents")}>For Parents</a><a href={href("students")}>For Students</a><a href={href("care")}>Our Care</a><a href={href("membership")}>Membership</a><a href={href("privacy")}>Privacy Promise</a><a href={href("join")}>Join Us</a></div>
+<div><div class="eyebrow">Support &amp; Quick Info</div><p>A parent usually starts with an introductory call.</p><p>In an immediate medical emergency, always call 911.</p></div>
+<div><div class="eyebrow">Important Notice</div><p>Kin &amp; Campus is an independent practice and is not formally affiliated with Virginia Tech.</p><p>Membership is not health insurance.</p></div>
+</div>
+<div class="w ft-copy"><p>&copy; 2026 Kin &amp; Campus. All rights reserved.</p></div></footer>
 </body></html>

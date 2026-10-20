@@ -1,6 +1,6 @@
 # Kin & Campus
 
-Concierge medicine in Blacksburg for Virginia Tech students. Live: https://brwaddell.github.io/kinandcampus/
+Concierge medicine in Blacksburg for Virginia Tech students. Live: https://kinandcampus.com/
 
 ```
 npm install

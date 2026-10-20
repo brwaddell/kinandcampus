@@ -1,9 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { href } from "../lib/paths";
 ---
 <Layout title="Our Care | Kin & Campus">
 <div class="w ph"><div class="eyebrow">Our care</div><h1>The plan they already have, held here.</h1><p class="lead">Asthma. ADHD. A thyroid. Anxiety. We keep it going — refills, holidays, finals, a letter home when something changes.</p></div>
-<div class="w"><div class="grid">
+<div class="w"><img class="photo" src={href("photos/campus-aerial.jpg")} width="800" height="450" alt="Campus and the surrounding hills, seen from above">
+<div class="grid">
 <div class="card"><svg class="ic" aria-hidden="true"><use href="#i-heart"/></svg><h3>Chronic care</h3><p>The list you already know stays on track. A local pediatrician holds the plan while they live here.</p></div>
 <div class="card"><svg class="ic" aria-hidden="true"><use href="#i-moon"/></svg><h3>A trained eye nearby</h3><p>Check-ins around holidays, finals, and the week they get back from break. Someone looking after them, in town.</p></div>
 <div class="card"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><h3>Same-day sick visits</h3><p>A doctor who already knows them. Same week, and usually same day.</p></div>

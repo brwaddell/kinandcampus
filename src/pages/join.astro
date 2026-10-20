@@ -2,23 +2,20 @@
 import Layout from "../layouts/Layout.astro";
 ---
 <Layout title="Join | Kin & Campus">
-<div class="w ph"><div class="eyebrow">Join</div><h1>Tell us about your student.</h1><p class="lead">We'll reach out within [TIMEFRAME] to talk it through. There's no obligation.</p></div>
-<div class="w"><form id="jf" class="card form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+<div class="w ph"><div class="eyebrow">Join</div><h1>Tell us who is coming to Blacksburg.</h1><p class="lead">A parent usually starts this. We'll follow with a call, then the student meets their pediatrician.</p></div>
+<div class="w"><form id="jf" class="card form" action="#" method="POST">
 <label>Your name<input name="parent_name" required autocomplete="name"></label>
 <label>Your email<input type="email" name="email" required autocomplete="email"></label>
-<label>Phone (optional)<input type="tel" name="phone" autocomplete="tel"></label>
+<label>Callback number<input type="tel" name="phone" autocomplete="tel"></label>
 <label>Student's first name<input name="student_name" required></label>
-<label>School and year<input name="school_year" placeholder="Virginia Tech, sophomore"></label>
-<label>Anything you'd like us to know (optional)<textarea name="notes" rows="4"></textarea></label>
-<p class="note" style="margin:0">Please don't include detailed medical information here. We'll talk privately and securely.</p>
+<label>Class year<input name="class_year" placeholder="2028"></label>
+<label>Hometown doctor's city<input name="hometown_pcp_city" placeholder="Richmond, Charlotte…"></label>
+<p class="note" style="margin:0">Do not include symptoms, diagnoses, medications, or records. This form is an introduction, not a chart.</p>
 <label class="ck"><input type="checkbox" name="consent" required> I agree Kin &amp; Campus may contact me about membership. I understand my student chooses what health information is shared with me.</label>
 <button class="btn" type="submit">Request a call</button></form>
-<div id="ty" class="card" hidden><h2>Thank you.</h2><p>We've received your request and will be in touch soon. We're glad you found us.</p></div>
-<p id="er" class="note" hidden>Something went wrong. Please email us at [EMAIL].</p>
+<div id="ty" class="card" hidden><h2>Thank you.</h2><p>We've received your request and will be in touch. We're glad you found us.</p></div>
 <script is:inline>
-var DEMO=false;var f=document.getElementById('jf');
-f.addEventListener('submit',function(e){e.preventDefault();function ok(){f.hidden=true;document.getElementById('ty').hidden=false}
-if(DEMO){ok();return}
-fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}}).then(function(r){r.ok?ok():document.getElementById('er').hidden=false}).catch(function(){document.getElementById('er').hidden=false})});
+var f=document.getElementById('jf');
+f.addEventListener('submit',function(e){e.preventDefault();f.hidden=true;document.getElementById('ty').hidden=false});
 </script></div>
 </Layout>

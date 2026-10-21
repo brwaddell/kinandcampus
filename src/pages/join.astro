@@ -68,9 +68,9 @@ import Layout from "../layouts/Layout.astro";
 <p id="ob-skip" class="ob-skip"><button class="lnk ob-call" type="button">Schedule a call</button></p>
 </form>
 
+<p id="ob-err" class="note" hidden>We couldn't send that. Try again in a moment.</p>
 <div id="ty" class="card" hidden>
-<h2>That's it. No chart on this website.</h2>
-<p>We'll call. We don't take a history on this site.</p>
+<h2>Thanks, we will be in touch.</h2>
 </div>
 </div>
 
@@ -229,6 +229,86 @@ import Layout from "../layouts/Layout.astro";
     show("call");
   });
 
+  function labelWho(value) {
+    switch (value) {
+      case "first-year":
+        return "Incoming first-year";
+      case "on-campus":
+        return "Already on campus";
+      case "graduate":
+        return "Graduate student";
+      case "student":
+        return "I'm the student";
+      case "":
+        return "";
+      default:
+        throw new Error("unknown who");
+    }
+  }
+
+  function labelWhen(value) {
+    switch (value) {
+      case "summer":
+        return "This summer";
+      case "august":
+        return "Before August";
+      case "here":
+        return "Already here";
+      case "":
+        return "";
+      default:
+        throw new Error("unknown when");
+    }
+  }
+
+  function labelYear(value) {
+    switch (value) {
+      case "first-year":
+        return "Incoming first-year";
+      case "here":
+        return "Already here";
+      case "graduate":
+        return "Graduate student";
+      case "":
+        return "";
+      default:
+        throw new Error("unknown year");
+    }
+  }
+
+  function labelDoctor(value) {
+    switch (value) {
+      case "yes":
+        return "Yes";
+      case "not-yet":
+        return "Not yet";
+      case "later":
+        return "We'll decide on the call";
+      case "":
+        return "";
+      default:
+        throw new Error("unknown doctor");
+    }
+  }
+
+  function labelTime(value) {
+    switch (value) {
+      case "morning":
+        return "Morning";
+      case "after-work":
+        return "After work";
+      case "weekend":
+        return "Weekend";
+      case "":
+        return "";
+      default:
+        throw new Error("unknown time");
+    }
+  }
+
+  var err = document.getElementById("ob-err");
+  var go = document.getElementById("call-go");
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var name = document.getElementById("first_name").value.trim();
@@ -237,8 +317,33 @@ import Layout from "../layouts/Layout.astro";
     answers.name = name;
     answers.phone = phone;
     answers.city = document.getElementById("hometown_city").value.trim();
-    form.hidden = true;
-    thanks.hidden = false;
+    err.hidden = true;
+    go.disabled = true;
+    var payload = {
+      _subject: "Kin & Campus — schedule a call",
+      path: answers.path,
+      who: labelWho(answers.who),
+      timing: answers.path === "student" ? labelYear(answers.year) : labelWhen(answers.when),
+      hometown_doctor: labelDoctor(answers.doctor),
+      city: answers.city,
+      first_name: answers.name,
+      mobile: answers.phone,
+      best_time: labelTime(answers.time)
+    };
+    fetch("https://formsubmit.co/ajax/brwaddell@gmail.com", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(payload)
+    }).then(function (res) {
+      if (!res.ok) throw new Error("send failed");
+      return res.json();
+    }).then(function () {
+      form.hidden = true;
+      thanks.hidden = false;
+    }).catch(function () {
+      go.disabled = false;
+      err.hidden = false;
+    });
   });
 
   show("who");

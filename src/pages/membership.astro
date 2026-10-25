@@ -2,17 +2,25 @@
 import Layout from "../layouts/Layout.astro";
 import { href } from "../lib/paths";
 ---
-<Layout title="Membership | Kin & Campus">
-<div class="w ph"><div class="eyebrow">Membership</div><h1>Direct pediatric care while they're on campus.</h1><p class="lead">One dedicated seat for the academic year. A board-certified pediatrician based right in Blacksburg who already knows them.</p></div>
-<div class="w"><div class="price"><div class="card"><h3>Academic Year Enrollment</h3><p>Comprehensive coverage from August through May. Direct physician access, same-day visits in town, structured check-ins, and ongoing coordination with your hometown physician.</p></div><div class="card"><h3>Strictly Capped Panel</h3><p>Maintained at a small enough size to guarantee real, same-day availability when acute illness hits during the semester.</p></div></div></div>
-<section style="padding-top:24px"><div class="w"><div class="price"><div class="card"><h3>Inside the year</h3><p>Office visits, usually same-day. Direct physician text access. Proactive check-ins around holidays, midterms, and finals. Seamless clinical updates to the hometown physician. Complete medication continuity. Assistance with university, housing, athletics, and travel health forms. Telehealth visits when an in-person room is not required.</p></div><div class="card"><h3>Outside the year</h3><p>Emergency department visits, hospitalizations, specialty care, and advanced imaging (we help arrange and coordinate these). Note: This website is not a medical chart. Membership is not health insurance; please maintain primary coverage for labs, specialists, and hospital care.</p></div></div></div></section>
-<section><div class="w" style="text-align:center"><h2>Preventing a single unnecessary ER visit covers years of membership.</h2><p class="lead" style="margin:16px auto 0">College health panics rarely happen during convenient hours. A midnight fever, severe asthma flare, or allergic reaction often sends students straight to the emergency room—resulting in a massive out-of-pocket bill, even with insurance.</p><p class="lead" style="margin:16px auto 0">Instead of heading straight to the hospital for an issue a local pediatrician can easily handle, your student can text a doctor who actually knows their baseline and get evaluated same-day right in Blacksburg.</p></div></section>
-<section><div class="w"><h2 style="margin-bottom:20px">Questions parents ask</h2>
-<details><summary>How does it start?</summary><p>A parent usually reaches out first, and we schedule an introductory phone call. Once enrolled, your student meets their pediatrician in Blacksburg for an unhurried baseline visit before classes get hectic. After that, they have direct access.</p></details>
-<details><summary>How soon can they be seen?</summary><p>Same week, and usually same day. Because our patient panel is strictly capped, we maintain immediate availability even during high-stress exam windows.</p></details>
-<details><summary>Will you share my student's information with me?</summary><p>At 18, your student is legally the owner of their medical chart. Before care begins, we work together to establish a clear, agreed-upon communication plan so you are kept in the loop without violating their adult privacy. Their hometown doctor receives a clinical update that same afternoon.</p></details>
-<details><summary>Does this replace insurance?</summary><p>No. Membership is not insurance. Please keep your student's primary coverage active for hospitalizations, emergency care, specialized testing, and labs.</p></details>
-<details><summary>What if my student is away from Blacksburg?</summary><p>In-person care right here in Blacksburg is the core of our practice. We also offer telehealth consultations when an in-person visit isn't necessary.</p></details>
-<details><summary>What if it's an emergency?</summary><p>Always call 911 or head to the nearest emergency room. Once they are safe, let us know and we will seamlessly coordinate their follow-up care.</p></details>
-<p style="margin-top:36px"><a class="btn" href={href("join")}>Reserve a spot</a></p></div></section>
+<Layout title="Membership | Kin & Campus" description="August through May. Visits in town, a number they can text, and a note home when the plan changes. Membership is not insurance.">
+<div class="w ph"><div class="eyebrow">Membership</div><h1>A seat for the school year.</h1><p class="lead">August through May. Visits in Blacksburg, a number they can text, and a note to the hometown doctor when the plan changes.</p></div>
+<div class="w">
+<div class="notes">
+<div class="note-row"><h3>The year</h3><p>One student, August through May. We keep the panel small enough that we can usually see them the same week, and often the same day.</p></div>
+<div class="note-row"><h3>Inside the year</h3><p>Office visits in town. A number they can text. Check-ins after breaks and around finals. Refills that do not lapse. Forms for school, housing, sports, and travel. A video visit when they do not need a room. A note to the hometown doctor if the plan changes.</p></div>
+<div class="note-row"><h3>Outside the year</h3><p>The ER, the hospital, a specialist, and advanced imaging are not part of membership. We help arrange those. Keep their primary insurance for labs, specialists, and hospital care. This website is not a chart.</p></div>
+</div>
+
+<div class="eyebrow" style="margin-top:56px">When they should start with us</div>
+<p class="lead">If it is a true emergency, call 911. For a fever, an asthma flare, or an allergy that a local pediatrician can handle, they can write us first. We already know their baseline.</p>
+
+<h2 style="margin:48px 0 20px">Questions parents ask</h2>
+<details><summary>How does it start?</summary><p>A parent usually writes first. We set up a call. Once they join, the student meets us in Blacksburg before classes get loud. After that, the number is theirs.</p></details>
+<details><summary>How soon can they be seen?</summary><p>The same week, and usually the same day. The panel stays small so that remains true during exams.</p></details>
+<details><summary>Will you share my student's information with me?</summary><p>At 18 the chart is theirs. Before we start, we write down what they want you to hear, and we follow it. If the plan changes, their hometown doctor gets a note that afternoon.</p></details>
+<details><summary>Does this replace insurance?</summary><p>No. Membership is not insurance. Keep their primary coverage for hospitalizations, emergency care, specialists, and labs.</p></details>
+<details><summary>What if my student is away from Blacksburg?</summary><p>In-person care here is the core of the practice. If they do not need a room, we can do a video visit.</p></details>
+<details><summary>What if it's an emergency?</summary><p>Call 911 or go to the nearest emergency room. Once they are safe, tell us. We will pick up the follow-up from there.</p></details>
+<p style="margin-top:36px"><a class="btn" href={href("join")}>Reserve a spot</a></p>
+</div>
 </Layout>

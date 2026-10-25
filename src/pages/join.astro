@@ -1,8 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 ---
-<Layout title="Join | Kin & Campus">
-<div class="w ph"><div class="eyebrow">Join</div><h1>Someone looking after them starts here.</h1></div>
+<Layout title="Join | Kin & Campus" description="A few questions, then a call. We do not take a history on this site.">
+<div class="w ph"><div class="eyebrow">Join</div><h1>We'll start with a call.</h1></div>
 <div class="w">
 <form id="ob" class="ob form" action="#" method="POST">
 <p id="ob-prog" class="ob-prog" aria-live="polite">Question 1 of 5</p>
@@ -48,7 +48,7 @@ import Layout from "../layouts/Layout.astro";
 <div class="step" data-step="city" hidden>
 <h2>Where are you coming from?</h2>
 <label>Hometown city only<input name="hometown_city" id="hometown_city" maxlength="80" autocomplete="address-level2" placeholder="Richmond, Charlotte…"></label>
-<p class="note">City only—not a doctor's name, and not a chart.</p>
+<p class="note">City only. Not a doctor's name, and not a chart.</p>
 <div class="ob-nav"><button class="btn" type="button" id="city-go">Continue</button></div>
 </div>
 
@@ -101,7 +101,7 @@ import Layout from "../layouts/Layout.astro";
     if (step === "call") {
       document.getElementById("call-q").textContent = answers.path === "student" ? "What's the best number for you?" : "Who should we call?";
       document.getElementById("call-note").textContent = answers.path === "student"
-        ? "Your number. Your chart. Your say. We don't take a history on this site."
+        ? "This is your number. We don't take a history on this site."
         : "We'll call. We don't take a history on this site.";
     }
   }
@@ -119,13 +119,13 @@ import Layout from "../layouts/Layout.astro";
   function whoLine(value) {
     switch (value) {
       case "first-year":
-        return "A first year. We'll look after them in town.";
+        return "Incoming first year. We'll meet them in town.";
       case "on-campus":
         return "Already in Blacksburg. We'll meet them here.";
       case "graduate":
-        return "Graduate school in town. We'll schedule a call.";
+        return "Graduate school. We'll schedule a call.";
       case "student":
-        return "Your number. Your chart. Your say.";
+        return "We'll talk with you directly.";
       default:
         throw new Error("unknown who");
     }
@@ -134,11 +134,11 @@ import Layout from "../layouts/Layout.astro";
   function whenLine(value) {
     switch (value) {
       case "summer":
-        return "This summer. We'll schedule a call.";
+        return "This summer works.";
       case "august":
-        return "August in Blacksburg. We'll schedule a call.";
+        return "We'll get them seen before August.";
       case "here":
-        return "Already here. We'll make room to talk this week.";
+        return "Already here. We can talk this week.";
       default:
         throw new Error("unknown when");
     }
@@ -149,7 +149,7 @@ import Layout from "../layouts/Layout.astro";
       case "first-year":
         return "Incoming. We'll meet you in town.";
       case "here":
-        return "Already here. We'll make room to talk this week.";
+        return "Already here. We can talk this week.";
       case "graduate":
         return "Graduate school. We'll schedule a call.";
       default:

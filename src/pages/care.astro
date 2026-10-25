@@ -2,20 +2,26 @@
 import Layout from "../layouts/Layout.astro";
 import { href } from "../lib/paths";
 ---
-<Layout title="ADHD, asthma, and college-student care in Blacksburg | Kin & Campus" description="Personalized pediatric care in Blacksburg for Virginia Tech students: ADHD and other medication follow-up, asthma, allergies, acne, sexual health, sick visits, and university forms.">
-<div class="w ph"><div class="eyebrow">Our care</div><h1>ADHD, asthma, and college-student care in Blacksburg.</h1><p class="lead">A board-certified pediatrician who treats the conditions they already have and the ones that show up on campus. We are not a 24/7 line, not a counseling center, and not the emergency room.</p></div>
+<Layout title="ADHD, asthma, and college-student care in Blacksburg | Kin & Campus" description="Pediatric care in Blacksburg for Virginia Tech students: ADHD and other medication follow-up, asthma, allergies, acne, sexual health, sick visits, and university forms.">
+<div class="w ph"><div class="eyebrow">Our care</div><h1>What we take care of here.</h1><p class="lead">Most students arrive with a plan. We keep it going. We also see the things that show up once they live in a dorm.</p></div>
 <div class="w"><img class="photo" src={href("photos/campus-aerial.jpg")} width="800" height="450" alt="Campus and the surrounding hills, seen from above">
-<div class="grid">
-<div class="card" id="adhd"><svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg><h3>ADHD</h3><p>Ongoing prescriptions and follow-up for students who already have a diagnosis. Campus clinics often refer ADHD medication to a community doctor. We can be that doctor in town.</p></div>
-<div class="card" id="mental-health"><svg class="ic" aria-hidden="true"><use href="#i-heart"/></svg><h3>Mental-health medication follow-up</h3><p>Anxiety and depression medications that started at home. We manage the prescription and refer when they need therapy. We are not a counseling center.</p></div>
-<div class="card" id="acne"><svg class="ic" aria-hidden="true"><use href="#i-moon"/></svg><h3>Acne</h3><p>Common, treatable, and easy to let slide when they are busy. Simple plans they can keep during the semester.</p></div>
-<div class="card" id="allergies"><svg class="ic" aria-hidden="true"><use href="#i-compass"/></svg><h3>Allergies</h3><p>Environmental and food allergies. Refills, action plans, and what to do when Blacksburg pollen or a dining hall surprise hits.</p></div>
-<div class="card" id="asthma"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg><h3>Asthma</h3><p>Controllers, rescue inhalers, and a plan that does not lapse over winter break. The hometown doctor stays copied.</p></div>
-<div class="card" id="forms"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg><h3>University, housing, and athletics forms</h3><p>Immunization paperwork, SSD housing letters, club and sports physicals, and travel health forms. The paperwork that otherwise sits in a parent group text.</p></div>
-<div class="card" id="sexual-health"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><h3>Sexual and reproductive health</h3><p>Confidential contraception, STI testing, and questions they may not want to put on a parent insurance portal. Their chart, their choice about who we tell.</p></div>
+<p class="lead" style="margin-top:36px">I see the same list I saw in clinic at home. The difference is they are two hundred miles from the doctor who started it.</p>
+<div class="notes">
+<div class="note-row" id="adhd"><h3>ADHD</h3><p>If they already have a diagnosis, we can continue the medication. Campus clinics often cannot. Bring the records.</p></div>
+<div class="note-row" id="mental-health"><h3>Anxiety and depression medication</h3><p>If they started a prescription at home, we can follow it. If they need a therapist, we help them find one. That part is not us.</p></div>
+<div class="note-row" id="asthma"><h3>Asthma and allergies</h3><p>Controllers. Rescue inhalers. Pollen and dining-hall surprises. The plan should last through winter break.</p></div>
+<div class="note-row" id="acne"><h3>Acne</h3><p>Common. Treatable. Easy to drop when they are busy. A simple plan they can keep.</p></div>
+<div class="note-row" id="forms"><h3>Forms</h3><p>The immunization packet. An SSD housing letter. A sports physical. Travel paperwork.</p></div>
+<div class="note-row" id="sexual-health"><h3>Sexual health</h3><p>Contraception. STI testing. Questions they may not want on a parent insurance statement. Their chart. Their choice about who we tell.</p></div>
 </div></div>
 <section><div class="w split"><svg class="art" viewBox="0 0 360 360" role="img" aria-label="Portrait placeholder"><rect width="360" height="360" rx="28" fill="#EADFCB"/><circle cx="180" cy="140" r="56" fill="#9CAF98"/><path d="M70 330q110-150 220 0z" fill="#6B2737"/><circle cx="270" cy="86" r="20" fill="none" stroke="#C9A24B" stroke-width="8"/></svg>
-<div><div class="eyebrow">The physician</div><h2>A board-certified pediatrician in Blacksburg.</h2><p class="lead">Personalized medical care for Virginia Tech students, coordinated with the hometown physician. Direct text. Visits eight minutes from campus. The year-long plan held here.</p></div></div></section>
-<section style="padding-top:0"><div class="w"><div class="eyebrow">A year in town</div><h2>Care from August through May.</h2><div class="grid"><div class="card"><div class="num">August</div><p>Initial parent intake conversation, followed by an in-person baseline visit with the student to establish care before classes start.</p></div><div class="card"><div class="num">The Semester</div><p>Sick visits, prescription refills, and check-ins around holiday transitions.</p></div><div class="card"><div class="num">Finals</div><p>A look at sleep, stress, and whether medications are still being taken during testing weeks.</p></div><div class="card"><div class="num">May</div><p>A year-end clinical summary to the hometown physician so August starts from a full page.</p></div></div>
+<div><div class="eyebrow">The physician</div><h2>A pediatrician who lives in Blacksburg.</h2><p class="lead">Board-certified. Eight minutes from campus. They can text when something comes up. If the plan changes, the hometown doctor hears that day.</p></div></div></section>
+<section style="padding-top:0"><div class="w"><div class="eyebrow">A year in town</div><h2>August through May.</h2>
+<div class="notes">
+<div class="note-row"><h3>August</h3><p>A call with you. Then a first visit with them, before classes start.</p></div>
+<div class="note-row"><h3>The semester</h3><p>Sick visits. Refills. A check-in when they come back from a break.</p></div>
+<div class="note-row"><h3>Finals</h3><p>Sleep. Stress. Whether they are still taking what we prescribed.</p></div>
+<div class="note-row"><h3>May</h3><p>A year-end note to the hometown doctor, so next August is not a cold start.</p></div>
+</div>
 <p style="margin-top:36px"><a class="btn" href={href("join")}>Reserve a spot</a></p></div></section>
 </Layout>

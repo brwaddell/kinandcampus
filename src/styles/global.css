@@ -28,6 +28,10 @@ footer .logo{display:flex;margin-bottom:10px}footer .fg .eyebrow{margin-bottom:1
 .lead{font-size:20px;color:var(--muted);max-width:640px;margin:20px 0 0}.hero2 .lead{margin:24px 0 32px}
 .hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin:0}
 @media(max-width:820px){.hero-cta{flex-direction:column;align-items:flex-start;gap:14px}}
+.hero-wide{padding-top:72px;padding-bottom:72px}
+.hero-wide h1{font-size:clamp(46px,7vw,76px);max-width:880px}
+.hero-wide .lead{max-width:760px;margin:26px 0 34px}
+@media(max-width:640px){.hero-wide{padding-top:44px;padding-bottom:52px}.hero-wide h1{font-size:clamp(38px,12vw,52px)}.hero-wide .lead{font-size:19px;margin:22px 0 30px}}
 .hero2{display:grid;gap:40px;grid-template-columns:1.05fr .95fr;align-items:center;padding-top:40px;padding-bottom:56px}
 .art{width:100%;height:auto;color:var(--ink)}
 img.art,img.photo{width:100%;height:auto;display:block;object-fit:cover;border-radius:28px;background:var(--line)}

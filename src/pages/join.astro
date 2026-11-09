@@ -1,15 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
 ---
-<Layout title="Join the program | Kin & Campus" description="Enrollment starts with a few questions and a call. We do not take a history on this site.">
-<div class="w ph"><div class="eyebrow">Join</div><h1>Enrollment starts with a conversation.</h1></div>
+<Layout title="Start a conversation | Kin & Campus" description="Request an introductory conversation about Kin & Campus. The form collects contact details only, not medical information.">
+<div class="w ph"><div class="eyebrow">Getting started</div><h1>Tell us a little about who is interested in the program.</h1><p class="lead">We will use these details to arrange an introductory conversation. Please do not include symptoms, diagnoses, medications, or medical records.</p></div>
 <div class="w">
 <form id="ob" class="ob form" action="#" method="POST">
 <p id="ob-prog" class="ob-prog" aria-live="polite">Question 1 of 5</p>
 <p id="ob-cb" class="ob-cb" hidden aria-live="polite"></p>
 
 <div class="step" data-step="who">
-<h2>Who are you looking after?</h2>
+<h2>Who is interested in Kin &amp; Campus?</h2>
 <div class="ob-opts">
 <button type="button" class="ob-opt" data-field="who" data-value="first-year">Incoming first-year</button>
 <button type="button" class="ob-opt" data-field="who" data-value="on-campus">Already on campus</button>
@@ -19,7 +19,7 @@ import Layout from "../layouts/Layout.astro";
 </div>
 
 <div class="step" data-step="when" hidden>
-<h2>When would they join the program?</h2>
+<h2>When would they like to begin?</h2>
 <div class="ob-opts">
 <button type="button" class="ob-opt" data-field="when" data-value="summer">This summer</button>
 <button type="button" class="ob-opt" data-field="when" data-value="august">Before August</button>
@@ -28,7 +28,7 @@ import Layout from "../layouts/Layout.astro";
 </div>
 
 <div class="step" data-step="year" hidden>
-<h2>Where are you in school?</h2>
+<h2>Where are you in your college experience?</h2>
 <div class="ob-opts">
 <button type="button" class="ob-opt" data-field="year" data-value="first-year">Incoming first-year</button>
 <button type="button" class="ob-opt" data-field="year" data-value="here">Already here</button>
@@ -37,7 +37,7 @@ import Layout from "../layouts/Layout.astro";
 </div>
 
 <div class="step" data-step="doctor" hidden>
-<h2 id="doctor-q">Is there a hometown doctor we should stay in touch with?</h2>
+<h2 id="doctor-q">Is there a hometown physician involved in current care?</h2>
 <div class="ob-opts">
 <button type="button" class="ob-opt" data-field="doctor" data-value="yes">Yes</button>
 <button type="button" class="ob-opt" data-field="doctor" data-value="not-yet">Not yet</button>
@@ -46,31 +46,31 @@ import Layout from "../layouts/Layout.astro";
 </div>
 
 <div class="step" data-step="city" hidden>
-<h2>Where are you coming from?</h2>
+<h2>What city do you call home?</h2>
 <label>Hometown city only<input name="hometown_city" id="hometown_city" maxlength="80" autocomplete="address-level2" placeholder="Richmond, Charlotte…"></label>
-<p class="note">City only. Not a doctor's name, and not a chart. We talk about the program on the call.</p>
+<p class="note">City only, please. We will discuss medical care later through the appropriate secure process.</p>
 <div class="ob-nav"><button class="btn" type="button" id="city-go">Continue</button></div>
 </div>
 
 <div class="step" data-step="call" hidden>
-<h2 id="call-q">Who should we call?</h2>
+<h2 id="call-q">Who should we contact?</h2>
 <label>First name<input name="first_name" id="first_name" required maxlength="40" autocomplete="given-name"></label>
 <label>Mobile<input type="tel" name="phone" id="phone" required maxlength="20" autocomplete="tel" inputmode="tel"></label>
-<p class="note" id="call-note">We'll call. We don't take a history on this site.</p>
+<p class="note" id="call-note">We will contact you about the program. This website does not collect medical history.</p>
 <p class="ob-times">Best time <span>(optional)</span></p>
 <div class="ob-opts ob-opts-row">
 <button type="button" class="ob-opt" data-field="time" data-value="morning">Morning</button>
 <button type="button" class="ob-opt" data-field="time" data-value="after-work">After work</button>
 <button type="button" class="ob-opt" data-field="time" data-value="weekend">Weekend</button>
 </div>
-<div class="ob-nav"><button class="btn" type="submit" id="call-go">Schedule a call</button></div>
+<div class="ob-nav"><button class="btn" type="submit" id="call-go">Request a call</button></div>
 </div>
-<p id="ob-skip" class="ob-skip"><button class="lnk ob-call" type="button">Schedule a call</button></p>
+<p id="ob-skip" class="ob-skip"><button class="lnk ob-call" type="button">Go directly to contact details</button></p>
 </form>
 
 <p id="ob-err" class="note" hidden>We couldn't send that. Try again in a moment.</p>
 <div id="ty" class="card" hidden>
-<h2>Thanks, we will be in touch.</h2>
+<h2>Thank you. We will be in touch about an introductory conversation.</h2>
 </div>
 </div>
 
@@ -99,10 +99,10 @@ import Layout from "../layouts/Layout.astro";
     prog.textContent = "Question " + n + " of " + seq.length;
     document.getElementById("ob-skip").hidden = step === "call";
     if (step === "call") {
-      document.getElementById("call-q").textContent = answers.path === "student" ? "What's the best number for you?" : "Who should we call?";
+      document.getElementById("call-q").textContent = answers.path === "student" ? "What is the best number for you?" : "Who should we contact?";
       document.getElementById("call-note").textContent = answers.path === "student"
-        ? "This is your number. We don't take a history on this site."
-        : "We'll call. We don't take a history on this site.";
+        ? "We will use this number to contact you about the program. Please do not submit medical information here."
+        : "We will contact you about the program. This website does not collect medical history.";
     }
   }
 
@@ -119,13 +119,13 @@ import Layout from "../layouts/Layout.astro";
   function whoLine(value) {
     switch (value) {
       case "first-year":
-        return "Incoming first year. We'll talk about enrolling them here.";
+        return "We will discuss what an incoming student's first year may require.";
       case "on-campus":
-        return "Already in Blacksburg. We'll talk about joining here.";
+        return "We will discuss whether the program fits their current needs in Blacksburg.";
       case "graduate":
-        return "Graduate school. We'll schedule a call about the program.";
+        return "We will discuss whether the program fits a graduate student's needs.";
       case "student":
-        return "We'll talk with you directly about joining.";
+        return "We will speak with you directly about the program.";
       default:
         throw new Error("unknown who");
     }
@@ -134,11 +134,11 @@ import Layout from "../layouts/Layout.astro";
   function whenLine(value) {
     switch (value) {
       case "summer":
-        return "This summer works for enrollment.";
+        return "We will discuss a summer start.";
       case "august":
-        return "We'll have them in the program before August.";
+        return "We will discuss beginning before August.";
       case "here":
-        return "Already here. We can talk this week about joining.";
+        return "We will discuss getting started while they are already in Blacksburg.";
       default:
         throw new Error("unknown when");
     }
@@ -147,11 +147,11 @@ import Layout from "../layouts/Layout.astro";
   function yearLine(value) {
     switch (value) {
       case "first-year":
-        return "Incoming. We'll talk about joining in town.";
+        return "We will discuss beginning care before the semester gets busy.";
       case "here":
-        return "Already here. We can talk this week about joining.";
+        return "We will discuss getting started while you are already in Blacksburg.";
       case "graduate":
-        return "Graduate school. We'll schedule a call about the program.";
+        return "We will discuss whether the program fits your needs as a graduate student.";
       default:
         throw new Error("unknown year");
     }
@@ -161,12 +161,12 @@ import Layout from "../layouts/Layout.astro";
     switch (value) {
       case "yes":
         return answers.path === "student"
-          ? "We'll stay in touch with your hometown doctor."
-          : "We'll stay in touch with their hometown doctor.";
+          ? "We can discuss appropriate coordination with your hometown physician."
+          : "We can discuss appropriate coordination with their hometown physician.";
       case "not-yet":
-        return "No hometown doctor yet. We'll sort that on the call.";
+        return "There is no hometown physician to coordinate with at present.";
       case "later":
-        return "We'll decide on the call.";
+        return "We can discuss this during the introductory conversation.";
       default:
         throw new Error("unknown doctor");
     }
@@ -320,7 +320,7 @@ import Layout from "../layouts/Layout.astro";
     err.hidden = true;
     go.disabled = true;
     var payload = {
-      _subject: "Kin & Campus — schedule a call",
+      _subject: "Kin & Campus introductory call request",
       path: answers.path,
       who: labelWho(answers.who),
       timing: answers.path === "student" ? labelYear(answers.year) : labelWhen(answers.when),
